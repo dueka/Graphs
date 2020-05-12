@@ -24,7 +24,7 @@ class Graph:
         if v1 in self.vertices and v2 in self.vertices:
             self.vertices[v1].add(v2)
         else:
-            raise IndexError()("Vertex does not exist!")
+            raise IndexError("Vertex does not exist!")
 
     def get_neighbors(self, vertex_id):
         """
@@ -47,14 +47,24 @@ class Graph:
                 searched.add(v)
             for next_vertex in self.get_neighbors(v):
                 vertexQueue.enqueue(next_vertex)
-        # print(vertexQueue)
+        print(vertexQueue)
 
     def dft(self, starting_vertex):
         """
         Print each vertex in depth-first order
         beginning from starting_vertex.
         """
-        pass  # TODO
+        vertexStack = Stack()
+        vertexStack.push(starting_vertex)
+        searched = set()
+        while vertexStack.size() > 0:
+            v = vertexStack.pop()
+            if v not in searched:
+                print(v)
+                searched.add(v)
+            for next_vertex in self.get_neighbors(v):
+                vertexStack.push(next_vertex)
+        print(vertexStack)
 
     def dft_recursive(self, starting_vertex):
         """
