@@ -3,9 +3,11 @@ Simple graph implementation
 """
 from util import Stack, Queue  # These may come in handy
 
+
 class Graph:
 
     """Represent a graph as a dictionary of vertices mapping labels to edges."""
+
     def __init__(self):
         self.vertices = {}
 
@@ -13,26 +15,39 @@ class Graph:
         """
         Add a vertex to the graph.
         """
-        pass  # TODO
+        self.vertices[vertex_id] = set()
 
     def add_edge(self, v1, v2):
         """
         Add a directed edge to the graph.
         """
-        pass  # TODO
+        if v1 in self.vertices and v2 in self.vertices:
+            self.vertices[v1].add(v2)
+        else:
+            raise IndexError()("Vertex does not exist!")
 
     def get_neighbors(self, vertex_id):
         """
         Get all neighbors (edges) of a vertex.
         """
-        pass  # TODO
+        return self.vertices[vertex_id]
 
     def bft(self, starting_vertex):
         """
         Print each vertex in breadth-first order
         beginning from starting_vertex.
         """
-        pass  # TODO
+        vertexQueue = Queue()
+        vertexQueue.enqueue(starting_vertex)
+        searched = set()
+        while vertexQueue.size() > 0:
+            v = vertexQueue.dequeue()
+            if v not in searched:
+                print(v)
+                searched.add(v)
+            for next_vertex in self.get_neighbors(v):
+                vertexQueue.enqueue(next_vertex)
+        # print(vertexQueue)
 
     def dft(self, starting_vertex):
         """
@@ -76,26 +91,35 @@ class Graph:
         """
         pass  # TODO
 
+
 if __name__ == '__main__':
     graph = Graph()  # Instantiate your graph
     # https://github.com/LambdaSchool/Graphs/blob/master/objectives/breadth-first-search/img/bfs-visit-order.png
-    graph.add_vertex(1)
-    graph.add_vertex(2)
-    graph.add_vertex(3)
-    graph.add_vertex(4)
-    graph.add_vertex(5)
-    graph.add_vertex(6)
-    graph.add_vertex(7)
-    graph.add_edge(5, 3)
-    graph.add_edge(6, 3)
-    graph.add_edge(7, 1)
-    graph.add_edge(4, 7)
-    graph.add_edge(1, 2)
-    graph.add_edge(7, 6)
-    graph.add_edge(2, 4)
-    graph.add_edge(3, 5)
-    graph.add_edge(2, 3)
-    graph.add_edge(4, 6)
+    # graph.add_vertex(1)
+    # graph.add_vertex(2)
+    # graph.add_vertex(3)
+    # graph.add_vertex(4)
+    # graph.add_vertex(5)
+    # graph.add_vertex(6)
+    # graph.add_vertex(7)
+    # graph.add_edge(5, 3)
+    # graph.add_edge(6, 3)
+    # graph.add_edge(7, 1)
+    # graph.add_edge(4, 7)
+    # graph.add_edge(1, 2)
+    # graph.add_edge(7, 6)
+    # graph.add_edge(2, 4)
+    # graph.add_edge(3, 5)
+    # graph.add_edge(2, 3)
+    # graph.add_edge(4, 6)
+    graph.add_vertex('0')
+    graph.add_vertex('1')
+    graph.add_vertex('2')
+    graph.add_vertex('3')
+    graph.add_edge('0', '1')
+    graph.add_edge('1', '0')
+    graph.add_edge('0', '3')
+    graph.add_edge('3', '0')
 
     '''
     Should print:
