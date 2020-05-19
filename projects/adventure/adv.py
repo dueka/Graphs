@@ -30,10 +30,10 @@ player = Player(world.starting_room)
 tranversal_path = []
 reversed_directions = {'n': 's', 's': 'n', 'w': 'e', 'e': 'w'}
 tranversal_graph = {}
-visited = {}
 # tranversal_graph.enqueue([player.current_room.id])
 
 s = Stack()
+visited = set()
 prev_room = None
 prev_point = None
 
